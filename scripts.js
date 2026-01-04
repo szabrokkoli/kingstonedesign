@@ -92,10 +92,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function applyHighlightEffect(targetId) {
         const img = document.getElementById(targetId);
-        if (!img) {
-            console.warn(`A professzor nem találja a(z) ${targetId} elemet. Bukás.`);
-            return;
-        }
 
         const panel = img.closest('.panel');
         if (panel) {
@@ -107,10 +103,10 @@ document.addEventListener("DOMContentLoaded", function() {
         setTimeout(() => {
             const card = img.closest('.stone-card') || img;
             card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            img.classList.add('highlight-active');
+            img.classList.add('highlight-effect');
 
             img.addEventListener('animationend', () => {
-                img.classList.remove('highlight-active');
+                img.classList.remove('highlight-effect');
             }, { once: true });
 
         }, 300);
