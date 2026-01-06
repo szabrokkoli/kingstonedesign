@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     document.querySelectorAll('.dropbtn').forEach(btn => {
         btn.onclick = (e) => {
-            if (window.innerWidth <= 768) {
+            if (window.innerWidth <= 1024) {
                 e.preventDefault();
                 btn.parentElement.classList.toggle('open');
             }
@@ -194,4 +194,33 @@ document.addEventListener("DOMContentLoaded", function() {
         carouselTrack.addEventListener('touchstart', stopCarousel);
         carouselTrack.addEventListener('touchend', () => setTimeout(startCarousel, 2000));
     }
+
+    /* --- CONTACT FORM HANDLING (PHP Feedback) --- */
+    const contactForm = document.getElementById('inquiryForm');
+
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+
+            const btn = contactForm.querySelector('.form-submit');
+            btn.textContent = "Küldés folyamatban...";
+            btn.style.opacity = "0.7";
+            btn.style.pointerEvents = "none";
+        });
+    }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const status = urlParams.get('status');
+
+    if (status === 'success') {
+        alert("Köszönjük! Üzenetét sikeresen megkaptuk.");
+
+        const uri = window.location.toString();
+        if (uri.indexOf("?") > 0) {
+            const clean_uri = uri.substring(0, uri.indexOf("?"));
+            window.history.replaceState({}, document.title, clean_uri);
+        }
+    } else if (status === 'error') {
+        alert("Hiba történt az üzenet küldésekor. Kérjük próbálja újra vagy hívjon minket telefonon!");
+    }
+
 });
