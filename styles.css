@@ -60,7 +60,7 @@ h2 {
 
 h1::after, h2::after {
     content: "";
-    bottom: -2px;
+    bottom: -1rem;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
