@@ -145,6 +145,10 @@ p {
         width: 80%;
     }
 
+    .text {
+        width: 80%;
+    }
+
     h1 {
         font-size: 2.5rem;
     }
@@ -1509,6 +1513,7 @@ p {
     }
 
     .rec-section {
+        grid-row: auto;
         grid-column: 1;
         border-left: none;
         border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -1633,24 +1638,19 @@ p {
     text-align: center;
 }
 
-.gallery-header p {
-    font-style: italic;
-    margin-bottom: 5rem;
-}
-
 .gallery-row {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 
 .gallery-item {
     position: relative;
-    width: 100%;
+    width: 90%;
     aspect-ratio: 1 / 1;
     overflow: hidden;
     transition: all 0.4s ease;
+    margin: 0 auto;
 }
 
 .gallery-item img {
@@ -1677,21 +1677,48 @@ p {
     aspect-ratio: 1 / 1;
 }
 
-@media (max-width: 900px) {
-    .gallery-row {
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-        margin-bottom: 10px;
+@media screen and (max-width: 1024px) {
+    .scattered-gallery {
+        margin: 10vh 0;
+        padding: 0;
     }
 
-    .gallery-item {
-        height: 250px;
+    .gallery-row {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
     }
 
     .empty-slot {
         display: none;
     }
 }
+
+@media screen and (max-width: 1024px) {
+    .scattered-gallery {
+        margin: 5vh 0;
+    }
+
+    .gallery-row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .gallery-item {
+        width: calc(50% - 10px);
+    }
+
+    .gallery-item:hover {
+        transform: translateY(0);
+        box-shadow: none;
+    }
+
+    .gallery-item:hover img {
+        transform: scale(1);
+    }
+}
+
 /* --- KAPCSOLATI PANEL & TÉRKÉP --- */
 
 .subpage-content-no-upper-picture {
@@ -2363,5 +2390,11 @@ tr:hover {
 
     .form-group.small-col {
         flex: 1;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .contact-form-section {
+        width: 90%;
     }
 }
