@@ -1291,6 +1291,14 @@ p {
     border-bottom: 1px solid rgba(var(--gold), 0.8);
 }
 
+.card-image-container:has(.no-link):hover::before {
+    opacity: 0;
+}
+
+.card-image-container:has(.no-link) {
+    cursor: default;
+}
+
 .card-image-container:hover::before {
     opacity: 1;
 }
