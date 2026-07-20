@@ -92,15 +92,30 @@
         <h2 class="animation">Küldjön üzenetet</h2>
         <p class="animation">Kérjen ajánlatot vagy érdeklődjön szolgáltatásainkról az alábbi űrlap kitöltésével.</p>
 
-        <form class="king-form" action="contact.php" method="POST">
+        <form class="king-form" action="https://api.web3forms.com/submit" method="POST">
 
+            <!-- WEB3FORMS REJTETT MEZŐK -->
+            <!-- 1. LÉPÉS: Ide másold be az emailben kapott Access Key-t! -->
+            <input type="hidden" name="access_key" value="b76796c5-f8a4-49de-9da3-a117667efcfa">
+            
+            <!-- 2. LÉPÉS: Ide írd be a weboldalad PONTOS címét, ahova sikeres küldés után visszadobja a felhasználót -->
+            <input type="hidden" name="https://kingstonedesign.hu/kapcsolat.html" value="https://a-te-weboldalad-cime.hu/kapcsolat.html">
+            
+            <!-- Email beállítások -->
+            <input type="hidden" name="subject" value="Új webes megkeresés a King Stone oldalról">
+            <input type="hidden" name="from_name" value="King Stone Weboldal">
+            <!-- Spam szűrő (Honeypot) - Ezt a botok kitöltik, de az emberek nem látják -->
+            <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
+
+            <!-- LÁTHATÓ ŰRLAP MEZŐK (A te eredeti dizájnod) -->
             <div class="animation form-group">
-                <label for="subject">Téma *</label>
-                <select id="subject" name="subject" required>
+                <label for="tema">Téma *</label>
+                <select id="tema" name="tema" required>
                     <option value="" disabled selected hidden>Válasszon témát...</option>
-                    <option value="ajanlatkeres">Ajánlatkérés</option>
-                    <option value="erdeklodes">Általános érdeklődés</option>
-                    <option value="egyeb">Egyéb</option>
+                    <option value="Ajánlatkérés">Ajánlatkérés</option>
+                    <option value="Általános érdeklődés">Általános érdeklődés</option>
+                    <option value="Egyéb">Egyéb</option>
                 </select>
             </div>
 
@@ -109,14 +124,14 @@
                     <label for="product">Termék típusa</label>
                     <select id="product" name="product">
                         <option value="" disabled selected hidden>Mit szeretne készíttetni?</option>
-                        <option value="burkolat">Burkolat</option>
-                        <option value="konyha">Konyhai munkalap és hátfal</option>
-                        <option value="kerites">Kerítés fedlap</option>
-                        <option value="mosdo">Mosdópult</option>
-                        <option value="lepcso">Lépcső burkolat</option>
-                        <option value="parkany">Párkány és könyöklő</option>
-                        <option value="medence">Medence szegélykő</option>
-                        <option value="egyeb">Egyéb / Nem tudom</option>
+                        <option value="Burkolat">Burkolat</option>
+                        <option value="Konyhai munkalap és hátfal">Konyhai munkalap és hátfal</option>
+                        <option value="Kerítés fedlap">Kerítés fedlap</option>
+                        <option value="Mosdópult">Mosdópult</option>
+                        <option value="Lépcső burkolat">Lépcső burkolat</option>
+                        <option value="Párkány és könyöklő">Párkány és könyöklő</option>
+                        <option value="Medence szegélykő">Medence szegélykő</option>
+                        <option value="Egyéb">Egyéb / Nem tudom</option>
                     </select>
                 </div>
 
@@ -124,24 +139,24 @@
                     <label for="material">Preferált anyag</label>
                     <select id="material" name="material">
                         <option value="" disabled selected hidden>Milyen anyagból?</option>
-                        <option value="nem_tudom" class="highlight-option">⚠ Még nem döntöttem / Nem tudom</option>
+                        <option value="Nem tudom" class="highlight-option">⚠ Még nem döntöttem / Nem tudom</option>
 
                         <optgroup label="Természetes kő">
-                            <option value="meszko">Mészkő</option>
-                            <option value="travertin">Travertin</option>
-                            <option value="marvany">Márvány</option>
-                            <option value="granit">Gránit</option>
-                            <option value="onyx">Onyx</option>
-                            <option value="kvarcit">Kvarcit</option>
+                            <option value="Mészkő">Mészkő</option>
+                            <option value="Travertin">Travertin</option>
+                            <option value="Márvány">Márvány</option>
+                            <option value="Gránit">Gránit</option>
+                            <option value="Onyx">Onyx</option>
+                            <option value="Kvarcit">Kvarcit</option>
                         </optgroup>
 
                         <optgroup label="Technikai kő">
-                            <option value="kvarc_kompozit">Kvarc kompozit</option>
-                            <option value="marvany_agglomerat">Márvány agglomerát</option>
+                            <option value="Kvarc kompozit">Kvarc kompozit</option>
+                            <option value="Márvány agglomerát">Márvány agglomerát</option>
                         </optgroup>
 
                         <optgroup label="Kerámia">
-                            <option value="greslap">Kerámia (Greslap)</option>
+                            <option value="Kerámia (Greslap)">Kerámia (Greslap)</option>
                         </optgroup>
                     </select>
                 </div>
