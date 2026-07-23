@@ -901,8 +901,8 @@ p {
 
 @media screen and (max-width: 768px) {
     .scroll-down-indicator {
-        top: auto;
-        bottom: 350px; 
+        top: 10rem;
+        bottom: auto; 
         left: 20px;
     }
 
@@ -918,8 +918,8 @@ p {
 
 @media screen and (max-width: 1024px) {
     .scroll-down-indicator {
-        top: auto;
-        bottom: 350px;
+        top: 10rem;
+        bottom: auto;
         left: 20px;
     }
 }
