@@ -772,18 +772,22 @@ p {
 
     .slide-overlay {
         position: absolute;
-        inset: 0;
+        bottom: 0; /* Anchors to the bottom */
+        left: 0;
+        right: 0;
+        top: auto; /* Ensures it doesn't stretch to the top */
         width: 100%;
         max-width: 100%;
         min-width: 100%;
-        right: 0;
-        padding: 60px 20px;
+        padding: 40px 20px; /* Adjusted padding to look balanced */
         clip-path: none;
-        backdrop-filter: blur(1px);
-        background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.4) 50%, transparent 100%);
+        
+        background: rgba(var(--extra-dark), 0.7); 
+        backdrop-filter: blur(5px);
+        
         display: flex;
         flex-direction: column;
-        justify-content: flex-end;
+        justify-content: center; /* Changed from flex-end since it's just a bottom box now */
         align-items: center;
         text-align: center;
         opacity: 0;
@@ -794,7 +798,7 @@ p {
     .slide-wrapper.active-slide .slide-overlay {
         opacity: 1;
         visibility: visible;
-        backdrop-filter: blur(1px);
+        backdrop-filter: blur(5px); 
     }
 
     .slide-wrapper.active-slide:hover .slide-overlay:hover {
@@ -848,13 +852,32 @@ p {
     }
 
     .slide-overlay {
-        min-width: 100%;
+        position: absolute;
+        bottom: 0;
+        left: 0;
         right: 0;
+        width: 100%;
+        min-width: 100%;
         clip-path: none;
-        background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
-        padding: 40px;
+        
+        background: rgba(var(--extra-dark), 0.7);
+        backdrop-filter: blur(5px);
+        
+        /* UPDATED: Added 60px padding to the bottom to make room for the dots */
+        padding: 40px 40px 60px 40px; 
+        
+        display: flex;
+        flex-direction: column;
         align-items: center;
         text-align: center;
+        justify-content: center;
+    }
+
+    /* NEW: Center the dots horizontally and place them at the very bottom */
+    .dots-wrapper {
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
     }
 
     .slide-overlay h3 {
