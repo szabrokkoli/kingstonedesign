@@ -44,6 +44,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
     /* --- 3. HERO SLIDER --- */
 
+    /* --- 3. HERO SLIDER --- */
+
     const track = document.querySelector('.slider-track');
     if (track) {
         const slides = document.querySelectorAll('.slide-wrapper');
@@ -67,6 +69,36 @@ document.addEventListener("DOMContentLoaded", function() {
 
         updateSlider();
         resetTimer();
+
+        // --- SWIPE LOGIC ---
+        let startX = 0;
+        let endX = 0;
+        const swipeThreshold = 50; // Minimum pixel distance to count as a swipe
+
+        track.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            endX = startX; // Reset endX to prevent accidental swipes on single taps
+        }, { passive: true });
+
+        track.addEventListener('touchmove', (e) => {
+            endX = e.touches[0].clientX;
+        }, { passive: true });
+
+        track.addEventListener('touchend', () => {
+            let diffX = startX - endX;
+
+            // Check if the swipe distance is greater than the threshold
+            if (Math.abs(diffX) > swipeThreshold) {
+                if (diffX > 0) {
+                    // Swiped left -> Next slide
+                    moveSlide(1);
+                } else {
+                    // Swiped right -> Previous slide
+                    moveSlide(-1);
+                }
+                resetTimer(); // Reset the timer so it doesn't auto-slide immediately after swiping
+            }
+        });
     }
 
 
