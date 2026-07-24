@@ -161,29 +161,41 @@ document.addEventListener("DOMContentLoaded", function() {
 
     /* --- 5. HIGHLIGHT & PATH/HASH ROUTING --- */
 
+/* --- HIGHLIGHT & PATH/HASH ROUTING --- */
+
 function handleUrlNavigation() {
-    const path = window.location.pathname; // Pl. "/kvarcit" vagy "/kapcsolat"
+    const path = window.location.pathname; // Pl. "/kvarcit"
     const hash = window.location.hash;     // Pl. "#kvarcit"
 
+    // 1. Ha a Google egy olyan URL-t hozott létre, ami valójában egy ID a természetes oldalon (pl. /kvarcit)
+    // Itt felsorolhatod azokat a kulcsszavakat, amik a termeszetes.html-en belül vannek:
+    const termeszetesIdsek = ['kvarcit', 'granit', 'marvany', 'meszko']; // Add ide a többi ID-t is, amik ott vannak!
+
+    const cleanPath = path.substring(1); // Levágja az elejéről a per jelet (pl. "kvarcit")
+
+    if (termeszetesIdsek.includes(cleanPath)) {
+        // Automatikusan átirányítjuk a helyes aloldalra horgonnyal, vagy betöltjük onnan
+        window.location.replace(`/termeszetes#${cleanPath}`);
+        return;
+    }
+
+    // 2. Normál hash alapú kezelés (ha már a helyes URL-en vagyunk)
     if (hash) {
-        // Ha van hash, a régimódi módon kezeljük
-        applyHighlightEffect(hash.substring(1));
-    } else if (path !== '/' && path !== '') {
-        // Ha tiszta útvonal van (pl. /kvarcit), leszedjük az elejéről a per jelet
-        const targetId = path.substring(1); 
-        applyHighlightEffect(targetId);
+        const targetId = hash.substring(1);
+        setTimeout(() => {
+            applyHighlightEffect(targetId);
+        }, 300);
     }
 }
 
-// Oldal betöltésekor lefut
 window.addEventListener('DOMContentLoaded', handleUrlNavigation);
 
-// Ha változna a hash a oldalon belül
 window.onhashchange = () => {
     if (window.location.hash) {
         applyHighlightEffect(window.location.hash.substring(1));
     }
 };
+
 
 
     /* --- 6. CAROUSEL --- */
