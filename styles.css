@@ -1109,6 +1109,38 @@ p {
     }
 }
 
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    .carousel-section {
+        padding: 0;
+        border: 0;
+        padding-top: 3rem;
+        width: 100%;
+    }
+
+    .carousel-track {
+        gap: 20px;
+        padding: 0;
+        border: 0;
+        width: 100%;
+    }
+
+    .carousel-window {
+        padding: 0;
+        border: 0;
+        width: 100%;
+    }
+
+    .carousel-card {
+        width: 280px;
+        height: 360px;
+    }
+
+    .card-title {
+        font-size: 1.1rem;
+        letter-spacing: 10px;
+    }
+}
+
 /* --- ZIGZAG --- */
 
 .zigzag {
