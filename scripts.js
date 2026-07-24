@@ -159,8 +159,31 @@ document.addEventListener("DOMContentLoaded", function() {
         }, 300);
     }
 
-    if (window.location.hash) applyHighlightEffect(window.location.hash.substring(1));
-    window.onhashchange = () => applyHighlightEffect(window.location.hash.substring(1));
+    /* --- 5. HIGHLIGHT & PATH/HASH ROUTING --- */
+
+function handleUrlNavigation() {
+    const path = window.location.pathname; // Pl. "/kvarcit" vagy "/kapcsolat"
+    const hash = window.location.hash;     // Pl. "#kvarcit"
+
+    if (hash) {
+        // Ha van hash, a régimódi módon kezeljük
+        applyHighlightEffect(hash.substring(1));
+    } else if (path !== '/' && path !== '') {
+        // Ha tiszta útvonal van (pl. /kvarcit), leszedjük az elejéről a per jelet
+        const targetId = path.substring(1); 
+        applyHighlightEffect(targetId);
+    }
+}
+
+// Oldal betöltésekor lefut
+window.addEventListener('DOMContentLoaded', handleUrlNavigation);
+
+// Ha változna a hash a oldalon belül
+window.onhashchange = () => {
+    if (window.location.hash) {
+        applyHighlightEffect(window.location.hash.substring(1));
+    }
+};
 
 
     /* --- 6. CAROUSEL --- */
