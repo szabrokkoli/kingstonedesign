@@ -721,7 +721,7 @@ p {
     left: 40px;
     display: flex;
     gap: 15px;
-    z-index: var(--z-fixed)
+    z-index: 200;
 }
 
 .dot {
