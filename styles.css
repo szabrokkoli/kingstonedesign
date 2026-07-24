@@ -929,7 +929,7 @@ p {
 
 .carousel-section {
     width: 100%;
-    padding: 40px 0;
+    padding: 0;
     border-top: 1px solid rgba(var(--gold), 0.1);
     border-bottom: 1px solid rgba(var(--gold), 0.1);
     display: flex;
@@ -939,7 +939,6 @@ p {
 
 .carousel-window {
     width: 100%;
-    max-width: 1600px;
     overflow: hidden;
     position: relative;
 }
@@ -1731,15 +1730,6 @@ p {
 
 /* --- KAPCSOLATI PANEL & TÉRKÉP --- */
 
-.subpage-content-no-upper-picture {
-    width: 100%;
-    margin-top: 120px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 60vh;
-}
-
 .contact-triple-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -1747,77 +1737,109 @@ p {
     width: 85%;
     max-width: 1400px;
     margin: 5rem auto 80px auto;
+    align-items: stretch; /* Ensures all cards match the height of the tallest card */
 }
 
 .mini-rec-card {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center; /* Centers the text vertically inside the card */
     text-align: center;
-    padding: 50px 30px;
+    padding: 2.5rem 2rem; /* Symmetrical, clean padding on all sides */
     background: linear-gradient(145deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
     border: 1px solid rgba(var(--gold), 0.2);
-    border-radius: 4px;
+    border-radius: 6px; /* Slightly softened corners for a modern feel */
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
     overflow: hidden;
+    height: 100%; 
 }
 
 .mini-rec-card:hover {
-    transform: translateY(-10px);
+    transform: translateY(-8px); /* Slightly subtler hover effect so it feels more premium */
     border-color: rgb(var(--gold));
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
     background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(var(--gold), 0.05));
 }
 
-.mini-visual {
-    font-size: 2.5rem;
-    color: rgb(var(--gold));
-    margin-bottom: 25px;
-    background: rgba(var(--gold), 0.1);
-    width: 80px;
-    height: 80px;
+/* Treat the text container as a flex column to control vertical spacing perfectly */
+.mini-text {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    border-radius: 50%;
-    transition: all 0.4s ease;
-}
-
-.mini-rec-card:hover .mini-visual {
-    background: rgb(var(--gold));
-    color: rgb(var(--dark));
-    transform: scale(1.5) rotate(5deg);
+    gap: 0.75rem; /* Creates exact, uniform space between every text line */
+    width: 100%;
 }
 
 .mini-text h3 {
     font-family: 'Cinzel', serif;
     color: rgb(var(--bright-text));
     font-size: 1.4rem;
-    margin: 0 0 15px 0;
+    padding: 0;
+    margin: 0 0 0.25rem 0; /* Tiny extra bump under the heading to separate it from the data */
     letter-spacing: 2px;
 }
 
 .mini-text p,
 .mini-text a {
     color: rgb(var(--text));
-    font-size: 1rem;
-    line-height: 1.6;
+    font-size: 1.05rem; /* Very slight bump in readability */
+    line-height: 1.5;
     display: block;
-    transition: color 0.3s;
+    margin: 0; /* We removed margins because the 'gap' property handles the spacing now */
+    transition: color 0.3s ease;
 }
 
+.mini-text a {
+    color: rgb(var(--text));
+    font-size: 1.05rem;
+    line-height: 1.5;
+    
+    /* Aligns the SVG icon and text horizontally */
+    display: inline-flex; 
+    align-items: center; 
+    justify-content: center;
+    gap: 0.6rem; 
+    margin: 0;
+    
+    /* Subtle underline styling */
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-color: rgba(var(--gold), 0.4);
+    text-underline-offset: 5px;
+    
+    transition: all 0.3s ease;
+}
+
+/* Styles the SVG icons completely from the stylesheet */
+.mini-text a svg {
+    flex-shrink: 0;
+    stroke: rgba(var(--gold), 0.8); /* Applies your CSS variable to the icon */
+    transition: stroke 0.3s ease, transform 0.3s ease;
+}
+
+/* Text hover state */
 .mini-text a:hover {
     color: rgb(var(--gold));
+    text-decoration-color: rgb(var(--gold));
+    transform: translateY(-2px); 
+}
+
+/* Icon hover state */
+.mini-text a:hover svg {
+    stroke: rgb(var(--gold));
+    transform: scale(1.1); 
 }
 
 .contact-map-full {
-    width: 90%;
-    max-width: 1600px;
-    margin: 0 auto 50px auto;
-    border: 1px solid rgba(var(--gold), 0.3);
-    padding: 10px;
-    background: rgba(255, 255, 255, 0.02);
+    width: 85%; /* Aligned with .contact-triple-grid */
+    max-width: 1400px; /* Aligned with .contact-triple-grid */
+    margin: 0 auto 80px auto;
+    border: 1px solid rgba(var(--gold), 0.2); /* Matched the card border opacity */
+    padding: 1rem; /* Switched to rems (16px) for a slightly breathier, cleaner border gap */
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01)); /* Matched the card background */
+    border-radius: 6px; /* Matched the card border-radius */
 }
 
 .contact-map-full iframe {
@@ -1826,6 +1848,12 @@ p {
     filter: grayscale(100%) invert(90%) contrast(85%);
     transition: filter 0.5s ease;
     display: block;
+    border-radius: 4px; /* Curves the sharp corners of the Google Map to fit inside the rounded container */
+}
+
+/* Optional: Gives the map a subtle interaction when the user hovers over it */
+.contact-map-full:hover iframe {
+    filter: grayscale(80%) invert(90%) contrast(95%); 
 }
 
 /* --- FOOTER --- */
