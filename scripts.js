@@ -74,8 +74,23 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const hamburger = document.querySelector(".hamburger");
     const navMenu = document.querySelector(".nav-links");
+    
     if (hamburger && navMenu) {
-        hamburger.onclick = () => { hamburger.classList.toggle("active"); navMenu.classList.toggle("active"); };
+        hamburger.onclick = () => { 
+            hamburger.classList.toggle("active"); 
+            navMenu.classList.toggle("active"); 
+            document.body.classList.toggle("no-scroll"); // Toggles the scroll lock on the body
+        };
+
+        // Closes the menu and removes the scroll lock when a regular link is clicked
+        const navItems = navMenu.querySelectorAll("a:not(.dropbtn)");
+        navItems.forEach(item => {
+            item.addEventListener("click", () => {
+                hamburger.classList.remove("active");
+                navMenu.classList.remove("active");
+                document.body.classList.remove("no-scroll");
+            });
+        });
     }
 
     document.querySelectorAll('.dropbtn').forEach(btn => {
@@ -194,33 +209,4 @@ document.addEventListener("DOMContentLoaded", function() {
         carouselTrack.addEventListener('touchstart', stopCarousel);
         carouselTrack.addEventListener('touchend', () => setTimeout(startCarousel, 2000));
     }
-
-    /* --- CONTACT FORM HANDLING (PHP Feedback) --- */
-    const contactForm = document.getElementById('inquiryForm');
-
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-
-            const btn = contactForm.querySelector('.form-submit');
-            btn.textContent = "Küldés folyamatban...";
-            btn.style.opacity = "0.7";
-            btn.style.pointerEvents = "none";
-        });
-    }
-
-    const urlParams = new URLSearchParams(window.location.search);
-    const status = urlParams.get('status');
-
-    if (status === 'success') {
-        alert("Köszönjük! Üzenetét sikeresen megkaptuk.");
-
-        const uri = window.location.toString();
-        if (uri.indexOf("?") > 0) {
-            const clean_uri = uri.substring(0, uri.indexOf("?"));
-            window.history.replaceState({}, document.title, clean_uri);
-        }
-    } else if (status === 'error') {
-        alert("Hiba történt az üzenet küldésekor. Kérjük próbálja újra vagy hívjon minket telefonon!");
-    }
-
 });
