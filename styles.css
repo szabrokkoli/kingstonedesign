@@ -648,16 +648,19 @@ p {
 .slide-overlay {
     position: absolute;
     bottom: 0;
-    right: -100%;
+    right: 0; /* Changed from -100% so it stays attached to the image */
     background: rgba(var(--extra-dark), 0.6);
     backdrop-filter: blur(5px);
     padding: 30px 20px 30px 140px;
     text-align: right;
-    visibility: hidden;
-    transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+    
+    /* Removed visibility: hidden and opacity properties */
+    
+    /* Keep a transition ONLY for the hover effect */
+    transition: backdrop-filter 0.4s ease, background 0.4s ease;
+    
     z-index: var(--z-layout);
     clip-path: polygon(20% 0%, 100% 0%, 100% 100%, 0% 100%);
-
     width: auto;
     min-width: 700px;
     max-width: 850px;
@@ -706,12 +709,6 @@ p {
     color: rgb(var(--dark));
     box-shadow: 0 0 15px rgba(var(--text), 0.2);
     transform: scale(1.1);
-}
-
-.slide-wrapper.active-slide .slide-overlay {
-    right: 0;
-    opacity: 1;
-    visibility: visible;
 }
 
 .slide-wrapper.active-slide:hover .slide-overlay:hover {
@@ -784,30 +781,22 @@ p {
 
     /* Text takes the bottom 45% of the screen */
     .slide-overlay {
-        position: relative; /* Removed absolute positioning */
+        position: relative; 
         height: 45%; 
         width: 100%;
         max-width: 100%;
         min-width: 100%;
         padding: 20px 20px 40px 20px;
         clip-path: none;
-        
-        /* Solid dark background instead of blur */
         background: rgb(var(--extra-dark)); 
         backdrop-filter: none;
-        
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         text-align: center;
         
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.4s ease-in-out;
-    }
-
-    .slide-wrapper.active-slide .slide-overlay {
+        /* REMOVED: opacity, visibility, and transition */
         opacity: 1;
         visibility: visible;
     }
@@ -888,22 +877,23 @@ p {
 
     /* Text takes bottom 40% */
     .slide-overlay {
-        position: relative; /* Removed absolute positioning */
+        position: relative; 
         height: 40%; 
         width: 100%;
         min-width: 100%;
         padding: 30px 40px 60px 40px;
         clip-path: none;
-        
-        /* Solid background */
         background: rgb(var(--extra-dark)); 
         backdrop-filter: none;
-        
         display: flex;
         flex-direction: column;
         align-items: center;
         text-align: center;
         justify-content: center;
+        
+        /* Ensure it's fully visible */
+        opacity: 1;
+        visibility: visible;
     }
 
     .slide-overlay h3 {
