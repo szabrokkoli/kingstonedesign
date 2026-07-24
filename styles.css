@@ -1269,7 +1269,7 @@ p {
     color: rgb(var(--dark));
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 768px) {
     .line {
         flex-direction: column;
         height: auto;
@@ -1288,7 +1288,19 @@ p {
     .text-side .btn {
         margin-top: 40px;
     }
+}
 
+/* --- TABLET TWEAKS (Keep Zigzag, but give text room to breathe) --- */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .line {
+        /* 35vw might be too short on an iPad, this gives it more vertical space */
+        height: 45vw; 
+    }
+    
+    .text-side p {
+        /* Allows the text to take up more width on smaller tablet screens */
+        max-width: 95%; 
+    }
 }
 
 
