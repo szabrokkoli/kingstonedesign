@@ -378,15 +378,16 @@ p {
         position: absolute;
         top: 100%;
         left: 0;
-        background-color: rgba(var(--dark), 0.95);
+        background-color: rgba(var(--dark), 0.98);
         backdrop-filter: blur(20px);
         border-top: 1px solid rgba(var(--gold), 0.3);
         z-index: var(--z-dropdown);
-        height: calc(100vh - 80px);
-        height: calc(100dvh - 80px);
+        
+        /* Menu takes full screen height */
+        min-height: calc(100dvh - 80px);
+        max-height: calc(100dvh - 80px);
         overflow-y: auto;
         
-        /* Add this line to remove the desktop spacing */
         gap: 0; 
     }
 
@@ -394,13 +395,11 @@ p {
         display: flex;
     }
 
-    /* Strict Flexbox structure for perfectly equal heights */
+    /* Allow items to stack naturally based on content size */
     .nav-links > li {
         width: 100%;
         text-align: center;
-        display: flex;
-        flex-direction: column;
-        flex: 1 1 0px; /* The '0px' basis forces equal distribution, ignoring content size */
+        display: block;
         margin: 0;
         padding: 0;
         border: none;
@@ -411,19 +410,15 @@ p {
         border-bottom: none;
     }
 
-    /* Anchor tag stretches to fill the strict li boundaries */
     .nav-links > li > a {
-        flex: 1 1 auto; /* Forces the link to expand perfectly inside the parent block */
         width: 100%;
-        min-height: 60px;
+        min-height: 5rem;
         margin: 0;
-        padding: 0;
+        padding: 15px 20px;
         display: flex;
         justify-content: center;
         align-items: center;
-        line-height: normal;
-        box-sizing: border-box;
-        border-bottom: none !important; /* Forces hover styles not to shift heights by adding borders */
+        border-bottom: none !important;
     }
 
     .nav-links > li:not(:last-child)::after {
@@ -434,7 +429,8 @@ p {
         display: none;
         position: relative;
         top: 0;
-        background-color: rgba(var(--dark), 0.2);
+        width: 100%;
+        background-color: rgba(var(--extra-dark), 0.6);
         border: none;
         box-shadow: none;
         padding-left: 0;
@@ -448,6 +444,7 @@ p {
         border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
+    /* When opened, it drops down cleanly and allows scrolling */
     li.open .dropdown-content {
         display: block;
         animation: fadeIn 0.3s ease;
@@ -464,7 +461,6 @@ p {
         }
     }
 }
-
 /* --- HERO --- */
 
 .hero {
