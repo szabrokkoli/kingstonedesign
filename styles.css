@@ -412,7 +412,7 @@ p {
 
     .nav-links > li > a {
         width: 100%;
-        min-height: 55px;
+        min-height: 5rem;
         margin: 0;
         padding: 15px 20px;
         display: flex;
@@ -471,7 +471,7 @@ p {
     height: 100vh;
 }
 
-div.upper-picture {
+.upper-picture {
     position: relative;
     padding: 0 10px;
     width: 100%;
@@ -489,7 +489,7 @@ div.upper-picture {
     cursor: default;
 }
 
-div.upper-picture.product {
+.upper-picture.product {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -521,185 +521,29 @@ div.upper-picture.product {
     transform: translateX(10px);
 }
 
-@media screen and (min-width: 769px) and (max-width: 1024px) {
-    div.upper-picture, div.upper-picture.product {
-        height: 35vh;
-        min-height: 35vh;
+@media (max-width: 1024px) {
+    .upper-picture {
+        height: 40vh;
     }
 
-    .hero {
-        height: 100vh;
-    }
-
-    .slider-container {
-        height: 100%;
-    }
-
-    /* Stack the image and text vertically */
-    .slide-wrapper {
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-    }
-
-    /* Image takes top 60% */
-    .slide {
-        width: 100%;
-        height: 60%; 
-        object-fit: cover;
-    }
-
-    .slide-overlay::before {
-        content: "";
-        position: absolute;
-        bottom: 100%;
-        left: 0;
-        width: 100%;
-        height: 15vh; 
-        background: linear-gradient(to top, rgb(var(--extra-dark)) 0%, rgba(var(--extra-dark), 0) 100%);
-        pointer-events: none;
-    }
-
-    /* Text takes bottom 40% */
-    .slide-overlay {
-        position: relative; 
-        height: 40%; 
-        width: 100%;
-        min-width: 100%;
-        padding: 30px 40px 60px 40px;
-        clip-path: none;
-        background: rgb(var(--extra-dark)); 
-        backdrop-filter: none;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        justify-content: center;
-        
-        /* Ensure it's fully visible */
-        opacity: 1;
-        visibility: visible;
-    }
-
-    .slide-overlay h3 {
-        font-size: 2.2rem;
-        margin-bottom: 10px;
-        color: rgb(var(--gold));
-        text-shadow: none;
-    }
-
-    .slide-overlay p {
-        font-size: 1.1rem;
-        line-height: 1.4;
-        max-width: 90%;
-        margin: 0 auto 20px auto;
-        text-shadow: none;
-    }
-
-    .dots-wrapper {
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
+    .upper-picture.product {
+        height: 40vh;
     }
 }
 
 @media screen and (max-width: 768px) {
-    div.upper-picture,
-    div.upper-picture.product {
-        height: 35vh;
-        min-height: 35vh;
-        font-size: clamp(2rem, 2.5vw, 3.5rem);
+    .upper-picture {
+        height: 40vh;
+        font-size: clamp(2.5rem, 3rem, 5rem);
         justify-content: center;
         align-items: center;
-        padding-top: 5vh;
     }
 
-    .hero {
-        margin-top: 0;
-        height: 100vh; 
-        height: 100dvh;
-    }
-
-    .slider-container {
-        height: 100%;
-        width: 100vw;
-    }
-
-    .slide-wrapper {
-        display: flex;
-        flex-direction: column; 
-        height: 100%;
-    }
-
-    .slide {
-        width: 100%;
-        height: 55%; 
-        object-fit: cover;
-        object-position: center;
-    }
-
-    .slide-overlay::before {
-        content: "";
-        position: absolute;
-        bottom: 100%;
-        left: 0;
-        width: 100%;
-        height: 15vh;
-        background: linear-gradient(to top, rgb(var(--extra-dark)) 0%, rgba(var(--extra-dark), 0) 100%);
-        pointer-events: none;
-    }
-
-    .slide-overlay {
-        position: relative; 
-        height: 45%; 
-        width: 100%;
-        max-width: 100%;
-        min-width: 100%;
-        padding: 20px 20px 40px 20px;
-        clip-path: none;
-        background: rgb(var(--extra-dark)); 
-        backdrop-filter: none;
-        display: flex;
-        flex-direction: column;
+    .upper-picture.product {
+        height: 40vh;
+        font-size: clamp(2.5rem, 3rem, 5rem);
         justify-content: center;
         align-items: center;
-        text-align: center;
-        opacity: 1;
-        visibility: visible;
-    }
-
-    .slide-overlay h3 {
-        font-size: 1.4rem;
-        margin-bottom: 10px;
-        color: rgb(var(--gold));
-        text-shadow: none;
-    }
-
-    .slide-overlay p {
-        font-size: 0.95rem;
-        line-height: 1.4;
-        max-width: 95%;
-        margin: 0 auto 15px auto;
-        text-shadow: none;
-    }
-
-    .btn {
-        margin-top: 0;
-        padding: 10px 30px;
-        font-size: 0.8rem;
-        background: rgba(var(--gold), 0.1);
-    }
-
-    .dots-wrapper {
-        bottom: 15px;
-        left: 50%;
-        transform: translateX(-50%);
-    }
-
-    .view-material-link {
-        right: 20px;
-        bottom: 20px;
-        font-size: 0.65rem;
     }
 }
 
@@ -800,12 +644,17 @@ div.upper-picture.product {
 .slide-overlay {
     position: absolute;
     bottom: 0;
-    right: 0;
+    right: 0; /* Changed from -100% so it stays attached to the image */
     background: rgba(var(--extra-dark), 0.6);
     backdrop-filter: blur(5px);
     padding: 30px 20px 30px 140px;
     text-align: right;
+    
+    /* Removed visibility: hidden and opacity properties */
+    
+    /* Keep a transition ONLY for the hover effect */
     transition: backdrop-filter 0.4s ease, background 0.4s ease;
+    
     z-index: var(--z-layout);
     clip-path: polygon(20% 0%, 100% 0%, 100% 100%, 0% 100%);
     width: auto;
@@ -818,6 +667,7 @@ div.upper-picture.product {
 }
 
 .slide-overlay h3 {
+
     font-family: 'Cinzel', serif;
     margin: 0 0 10px 0;
     text-transform: uppercase;
@@ -884,6 +734,184 @@ div.upper-picture.product {
     height: 10px;
     border-radius: 5px;
     background-color: white;
+}
+
+@media screen and (max-width: 768px) {
+
+    .hero {
+        margin-top: 0;
+        height: 100vh; 
+        height: 100dvh; /* Better handling for mobile browser bars */
+    }
+
+    .slider-container {
+        height: 100%;
+        width: 100vw;
+    }
+
+    /* Stack the image and text vertically */
+    .slide-wrapper {
+        display: flex;
+        flex-direction: column; 
+        height: 100%;
+    }
+
+    /* Image takes the top 55% of the screen */
+    .slide {
+        width: 100%;
+        height: 55%; 
+        object-fit: cover;
+        object-position: center;
+    }
+
+    .slide-overlay::before {
+        content: "";
+        position: absolute;
+        bottom: 100%; /* Pushes the gradient to sit exactly on top of the text block */
+        left: 0;
+        width: 100%;
+        height: 15vh; /* How tall the fade effect is */
+        background: linear-gradient(to top, rgb(var(--extra-dark)) 0%, rgba(var(--extra-dark), 0) 100%);
+        pointer-events: none; /* Ensures the gradient doesn't block touch interactions */
+    }
+
+    /* Text takes the bottom 45% of the screen */
+    .slide-overlay {
+        position: relative; 
+        height: 45%; 
+        width: 100%;
+        max-width: 100%;
+        min-width: 100%;
+        padding: 20px 20px 40px 20px;
+        clip-path: none;
+        background: rgb(var(--extra-dark)); 
+        backdrop-filter: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        
+        /* REMOVED: opacity, visibility, and transition */
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .slide-overlay h3 {
+        font-size: 1.4rem;
+        margin-bottom: 10px;
+        color: rgb(var(--gold));
+        text-shadow: none; /* No longer needed on solid background */
+    }
+
+    .slide-overlay p {
+        font-size: 0.95rem;
+        line-height: 1.4;
+        max-width: 95%;
+        margin: 0 auto 15px auto;
+        text-shadow: none; /* No longer needed on solid background */
+    }
+
+    .btn {
+        margin-top: 0;
+        padding: 10px 30px;
+        font-size: 0.8rem;
+        background: rgba(var(--gold), 0.1);
+    }
+
+    .dots-wrapper {
+        bottom: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .view-material-link {
+        right: 20px;
+        bottom: 20px;
+        font-size: 0.65rem;
+    }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    .upper-picture, .upper-picture.product {
+        height: 50vh;
+        min-height: 400px;
+    }
+
+    .hero {
+        height: 100vh;
+    }
+
+    .slider-container {
+        height: 100%;
+    }
+
+    /* Stack the image and text vertically */
+    .slide-wrapper {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    /* Image takes top 60% */
+    .slide {
+        width: 100%;
+        height: 60%; 
+        object-fit: cover;
+    }
+
+    .slide-overlay::before {
+        content: "";
+        position: absolute;
+        bottom: 100%;
+        left: 0;
+        width: 100%;
+        height: 15vh; 
+        background: linear-gradient(to top, rgb(var(--extra-dark)) 0%, rgba(var(--extra-dark), 0) 100%);
+        pointer-events: none;
+    }
+
+    /* Text takes bottom 40% */
+    .slide-overlay {
+        position: relative; 
+        height: 40%; 
+        width: 100%;
+        min-width: 100%;
+        padding: 30px 40px 60px 40px;
+        clip-path: none;
+        background: rgb(var(--extra-dark)); 
+        backdrop-filter: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+        
+        /* Ensure it's fully visible */
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .slide-overlay h3 {
+        font-size: 2.2rem;
+        margin-bottom: 10px;
+        color: rgb(var(--gold));
+        text-shadow: none;
+    }
+
+    .slide-overlay p {
+        font-size: 1.1rem;
+        line-height: 1.4;
+        max-width: 90%;
+        margin: 0 auto 20px auto;
+        text-shadow: none;
+    }
+
+    .dots-wrapper {
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
 }
 
 /* --- SCROLL INDICATOR --- */
