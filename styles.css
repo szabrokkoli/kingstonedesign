@@ -1,5 +1,4 @@
 :root {
-
     /* --- COLORS --- */
     --gold: 184, 170, 111;
     --text: 194, 187, 186;
@@ -110,9 +109,7 @@ p {
     line-height: 2;
 }
 
-
 @media screen and (max-width: 768px) {
-
     .dark-background p {
         width: 90%;
     }
@@ -137,7 +134,6 @@ p {
 }
 
 @media screen and (min-width: 769px) and (max-width: 1024px) {
-
     .dark-background{
         width: 100%;
     }
@@ -382,42 +378,51 @@ p {
         backdrop-filter: blur(20px);
         border-top: 1px solid rgba(var(--gold), 0.3);
         z-index: var(--z-dropdown);
+        height: calc(100vh - 80px);
+        height: calc(100dvh - 80px);
+        overflow-y: auto;
+        
+        /* Add this line to remove the desktop spacing */
+        gap: 0; 
     }
 
     .nav-links.active {
         display: flex;
     }
 
-    .nav-links li,
-    .dropdown {
+    /* Strict Flexbox structure for perfectly equal heights */
+    .nav-links > li {
         width: 100%;
         text-align: center;
-        display: block;
-        height: auto;
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 0px; /* The '0px' basis forces equal distribution, ignoring content size */
         margin: 0;
         padding: 0;
         border: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    .nav-links a,
-    .nav-links .dropbtn,
-    .nav-links .selected {
+    .nav-links > li:last-child {
+        border-bottom: none;
+    }
+
+    /* Anchor tag stretches to fill the strict li boundaries */
+    .nav-links > li > a {
+        flex: 1 1 auto; /* Forces the link to expand perfectly inside the parent block */
         width: 100%;
+        min-height: 60px;
         margin: 0;
-
-        min-height: 80px;
-        height: auto;
-
         padding: 0;
         display: flex;
         justify-content: center;
         align-items: center;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         line-height: normal;
         box-sizing: border-box;
+        border-bottom: none !important; /* Forces hover styles not to shift heights by adding borders */
     }
 
-    .nav-links li:not(:last-child)::after {
+    .nav-links > li:not(:last-child)::after {
         display: none;
     }
 
@@ -428,7 +433,15 @@ p {
         background-color: rgba(var(--dark), 0.2);
         border: none;
         box-shadow: none;
-        padding-left: 20px;
+        padding-left: 0;
+    }
+
+    .dropdown-content a {
+        padding: 15px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     li.open .dropdown-content {
