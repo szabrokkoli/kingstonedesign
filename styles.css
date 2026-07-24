@@ -747,49 +747,61 @@ p {
 
     .hero {
         margin-top: 0;
+        height: 100vh; 
+        height: 100dvh; /* Better handling for mobile browser bars */
     }
 
     .slider-container {
         height: 100%;
         width: 100vw;
-        aspect-ratio: auto;
-        backdrop-filter: blur(1px);
-        min-height: 250px;
     }
 
-    .slider-track, .slide-wrapper {
+    /* Stack the image and text vertically */
+    .slide-wrapper {
+        display: flex;
+        flex-direction: column; 
         height: 100%;
-        align-items: stretch;
     }
 
+    /* Image takes the top 55% of the screen */
     .slide {
         width: 100%;
-        height: 100%;
+        height: 55%; 
         object-fit: cover;
         object-position: center;
-        backdrop-filter: blur(1px);
     }
 
-    .slide-overlay {
+    .slide-overlay::before {
+        content: "";
         position: absolute;
-        bottom: 0; /* Anchors to the bottom */
+        bottom: 100%; /* Pushes the gradient to sit exactly on top of the text block */
         left: 0;
-        right: 0;
-        top: auto; /* Ensures it doesn't stretch to the top */
+        width: 100%;
+        height: 15vh; /* How tall the fade effect is */
+        background: linear-gradient(to top, rgb(var(--extra-dark)) 0%, rgba(var(--extra-dark), 0) 100%);
+        pointer-events: none; /* Ensures the gradient doesn't block touch interactions */
+    }
+
+    /* Text takes the bottom 45% of the screen */
+    .slide-overlay {
+        position: relative; /* Removed absolute positioning */
+        height: 45%; 
         width: 100%;
         max-width: 100%;
         min-width: 100%;
-        padding: 40px 20px; /* Adjusted padding to look balanced */
+        padding: 20px 20px 40px 20px;
         clip-path: none;
         
-        background: rgba(var(--extra-dark), 0.7); 
-        backdrop-filter: blur(5px);
+        /* Solid dark background instead of blur */
+        background: rgb(var(--extra-dark)); 
+        backdrop-filter: none;
         
         display: flex;
         flex-direction: column;
-        justify-content: center; /* Changed from flex-end since it's just a bottom box now */
+        justify-content: center;
         align-items: center;
         text-align: center;
+        
         opacity: 0;
         visibility: hidden;
         transition: opacity 0.4s ease-in-out;
@@ -798,26 +810,21 @@ p {
     .slide-wrapper.active-slide .slide-overlay {
         opacity: 1;
         visibility: visible;
-        backdrop-filter: blur(5px); 
-    }
-
-    .slide-wrapper.active-slide:hover .slide-overlay:hover {
-        backdrop-filter: none;
     }
 
     .slide-overlay h3 {
         font-size: 1.4rem;
         margin-bottom: 10px;
         color: rgb(var(--gold));
-        text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+        text-shadow: none; /* No longer needed on solid background */
     }
 
     .slide-overlay p {
         font-size: 0.95rem;
         line-height: 1.4;
-        max-width: 90%;
-        margin: 0 auto 20px auto;
-        text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+        max-width: 95%;
+        margin: 0 auto 15px auto;
+        text-shadow: none; /* No longer needed on solid background */
     }
 
     .btn {
@@ -826,7 +833,6 @@ p {
         font-size: 0.8rem;
         background: rgba(var(--gold), 0.1);
     }
-
 
     .dots-wrapper {
         bottom: 15px;
@@ -847,24 +853,51 @@ p {
         min-height: 400px;
     }
 
+    .hero {
+        height: 100vh;
+    }
+
     .slider-container {
         height: 100%;
     }
 
-    .slide-overlay {
+    /* Stack the image and text vertically */
+    .slide-wrapper {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    /* Image takes top 60% */
+    .slide {
+        width: 100%;
+        height: 60%; 
+        object-fit: cover;
+    }
+
+    .slide-overlay::before {
+        content: "";
         position: absolute;
-        bottom: 0;
+        bottom: 100%;
         left: 0;
-        right: 0;
+        width: 100%;
+        height: 15vh; 
+        background: linear-gradient(to top, rgb(var(--extra-dark)) 0%, rgba(var(--extra-dark), 0) 100%);
+        pointer-events: none;
+    }
+
+    /* Text takes bottom 40% */
+    .slide-overlay {
+        position: relative; /* Removed absolute positioning */
+        height: 40%; 
         width: 100%;
         min-width: 100%;
+        padding: 30px 40px 60px 40px;
         clip-path: none;
         
-        background: rgba(var(--extra-dark), 0.7);
-        backdrop-filter: blur(5px);
-        
-        /* UPDATED: Added 60px padding to the bottom to make room for the dots */
-        padding: 40px 40px 60px 40px; 
+        /* Solid background */
+        background: rgb(var(--extra-dark)); 
+        backdrop-filter: none;
         
         display: flex;
         flex-direction: column;
@@ -873,26 +906,25 @@ p {
         justify-content: center;
     }
 
-    /* NEW: Center the dots horizontally and place them at the very bottom */
+    .slide-overlay h3 {
+        font-size: 2.2rem;
+        margin-bottom: 10px;
+        color: rgb(var(--gold));
+        text-shadow: none;
+    }
+
+    .slide-overlay p {
+        font-size: 1.1rem;
+        line-height: 1.4;
+        max-width: 90%;
+        margin: 0 auto 20px auto;
+        text-shadow: none;
+    }
+
     .dots-wrapper {
         bottom: 20px;
         left: 50%;
         transform: translateX(-50%);
-    }
-
-    .slide-overlay h3 {
-        font-size: 3rem;
-        margin-bottom: 10px;
-        color: rgb(var(--gold));
-        text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
-    }
-
-    .slide-overlay p {
-        font-size: 1.2rem;
-        line-height: 1.4;
-        max-width: 90%;
-        margin: 0 auto 20px auto;
-        text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
     }
 }
 
