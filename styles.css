@@ -383,7 +383,6 @@ p {
         border-top: 1px solid rgba(var(--gold), 0.3);
         z-index: var(--z-dropdown);
         
-        /* Menu takes full screen height */
         min-height: calc(100dvh - 80px);
         max-height: calc(100dvh - 80px);
         overflow-y: auto;
@@ -395,7 +394,6 @@ p {
         display: flex;
     }
 
-    /* Allow items to stack naturally based on content size */
     .nav-links > li {
         width: 100%;
         text-align: center;
@@ -444,7 +442,6 @@ p {
         border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
-    /* When opened, it drops down cleanly and allows scrolling */
     li.open .dropdown-content {
         display: block;
         animation: fadeIn 0.3s ease;
@@ -644,15 +641,11 @@ p {
 .slide-overlay {
     position: absolute;
     bottom: 0;
-    right: 0; /* Changed from -100% so it stays attached to the image */
+    right: 0;
     background: rgba(var(--extra-dark), 0.6);
     backdrop-filter: blur(5px);
     padding: 30px 20px 30px 140px;
     text-align: right;
-    
-    /* Removed visibility: hidden and opacity properties */
-    
-    /* Keep a transition ONLY for the hover effect */
     transition: backdrop-filter 0.4s ease, background 0.4s ease;
     
     z-index: var(--z-layout);
@@ -741,7 +734,7 @@ p {
     .hero {
         margin-top: 0;
         height: 100vh; 
-        height: 100dvh; /* Better handling for mobile browser bars */
+        height: 100dvh;
     }
 
     .slider-container {
@@ -749,14 +742,12 @@ p {
         width: 100vw;
     }
 
-    /* Stack the image and text vertically */
     .slide-wrapper {
         display: flex;
         flex-direction: column; 
         height: 100%;
     }
 
-    /* Image takes the top 55% of the screen */
     .slide {
         width: 100%;
         height: 55%; 
@@ -767,15 +758,14 @@ p {
     .slide-overlay::before {
         content: "";
         position: absolute;
-        bottom: 100%; /* Pushes the gradient to sit exactly on top of the text block */
+        bottom: 100%;
         left: 0;
         width: 100%;
-        height: 15vh; /* How tall the fade effect is */
+        height: 15vh;
         background: linear-gradient(to top, rgb(var(--extra-dark)) 0%, rgba(var(--extra-dark), 0) 100%);
-        pointer-events: none; /* Ensures the gradient doesn't block touch interactions */
+        pointer-events: none;
     }
 
-    /* Text takes the bottom 45% of the screen */
     .slide-overlay {
         position: relative; 
         height: 45%; 
@@ -791,8 +781,6 @@ p {
         justify-content: center;
         align-items: center;
         text-align: center;
-        
-        /* REMOVED: opacity, visibility, and transition */
         opacity: 1;
         visibility: visible;
     }
@@ -801,7 +789,7 @@ p {
         font-size: 1.4rem;
         margin-bottom: 10px;
         color: rgb(var(--gold));
-        text-shadow: none; /* No longer needed on solid background */
+        text-shadow: none;
     }
 
     .slide-overlay p {
@@ -809,7 +797,7 @@ p {
         line-height: 1.4;
         max-width: 95%;
         margin: 0 auto 15px auto;
-        text-shadow: none; /* No longer needed on solid background */
+        text-shadow: none;
     }
 
     .btn {
@@ -846,14 +834,12 @@ p {
         height: 100%;
     }
 
-    /* Stack the image and text vertically */
     .slide-wrapper {
         display: flex;
         flex-direction: column;
         height: 100%;
     }
 
-    /* Image takes top 60% */
     .slide {
         width: 100%;
         height: 60%; 
@@ -871,7 +857,6 @@ p {
         pointer-events: none;
     }
 
-    /* Text takes bottom 40% */
     .slide-overlay {
         position: relative; 
         height: 40%; 
@@ -886,8 +871,6 @@ p {
         align-items: center;
         text-align: center;
         justify-content: center;
-        
-        /* Ensure it's fully visible */
         opacity: 1;
         visibility: visible;
     }
@@ -1051,8 +1034,8 @@ p {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
     text-shadow:
-            0 2px 5px rgba(0, 0, 0, 0.9),  /* Közeli, sötét réteg */
-            0 5px 15px rgba(0, 0, 0, 0.7); /* Távoli, lágyabb réteg */
+            0 2px 5px rgba(0, 0, 0, 0.9),
+            0 5px 15px rgba(0, 0, 0, 0.7);
     text-transform: uppercase;
     font-size: 1.2rem;
     letter-spacing: 12px;
@@ -1286,15 +1269,12 @@ p {
     }
 }
 
-/* --- TABLET TWEAKS (Keep Zigzag, but give text room to breathe) --- */
 @media (min-width: 769px) and (max-width: 1024px) {
     .line {
-        /* 35vw might be too short on an iPad, this gives it more vertical space */
         height: 45vw; 
     }
     
     .text-side p {
-        /* Allows the text to take up more width on smaller tablet screens */
         max-width: 95%; 
     }
 }
@@ -1639,20 +1619,20 @@ p {
     display: flex;
     flex-direction: column;
     gap: 100px;
-    width: 80%; /* Növelve 70%-ról, hogy több hely legyen a nagyobb képeknek */
-    max-width: 1600px; /* Megemelve a maximális szélesség */
+    width: 80%;
+    max-width: 1600px;
     margin: 80px auto 0 auto;
 }
 
 .project-card {
     display: grid;
-    grid-template-columns: 0.5fr 1fr; /* A vizuális rész kapott nagyobb arányt (1.2fr a képeknek, 1fr a szövegnek) */
+    grid-template-columns: 0.5fr 1fr;
     align-items: center;
     gap: 40px;
     background: rgba(255, 255, 255, 0.02);
     border: 1px solid rgba(var(--gold), 0.15);
     overflow: hidden;
-    padding: 40px; /* Kicsit tágasabb belső margó */
+    padding: 40px;
 }
 
 .project-card:nth-child(even) {
@@ -1679,7 +1659,7 @@ p {
 .img-large img {
     display: block;
     width: 100%;
-    height: 46vh; /* Megnövelve 30vh-ról */
+    height: 46vh;
     object-fit: cover;
     cursor: pointer;
     transition: transform 0.5s ease;
@@ -1694,7 +1674,6 @@ p {
 .img-small-grid {
     grid-column: 1 / span 3;
     display: grid;
-    /* 4 darab képed van egymás mellett, így 4 egyenlő oszlopra osztjuk a teljes szélességet */
     grid-template-columns: repeat(4, 1fr); 
     gap: 10px;
 }
@@ -1711,14 +1690,14 @@ p {
 .img-medium-grid {
     grid-column: 1 / span 3;
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Pontosan 2 egyenlő oszlop, amik széthúzódnak a teljes szélességre */
+    grid-template-columns: repeat(2, 1fr);
     gap: 10px;
 }
 
 .img-medium-grid img {
     display: block;
     width: 100%;
-    height: 280px; /* Megnövelve 220px-ről */
+    height: 280px;
     object-fit: cover;
     cursor: pointer;
     transition: 0.3s;
@@ -1753,21 +1732,20 @@ p {
         padding: 15px;
     }
 
-    /* --- MOBIL FIXEK A KÉPEKHEZ --- */
     .project-visuals {
-        grid-template-columns: 1fr; /* Mobilon a fő vizuális keret is egy oszlop legyen */
+        grid-template-columns: 1fr;
     }
 
     .img-small-grid {
-        grid-template-columns: repeat(2, 1fr) !important; /* Mobilon a 4 kis kép 2x2-es rácsban legyen, hogy ne legyenek túl vékonyak */
+        grid-template-columns: repeat(2, 1fr) !important;
     }
 
     .img-medium-grid {
-        grid-template-columns: 1fr !important; /* Mobilon a közepes/kültéri képek egymás alatt, teljes szélességben legyenek */
+        grid-template-columns: 1fr !important;
     }
 
     .img-medium-grid img {
-        height: 220px; /* Kicsit alacsonyabb magasság mobilon, hogy ne foglaljanak túl nagy helyet */
+        height: 220px;
     }
 }
 
@@ -1880,7 +1858,7 @@ p {
     }
 }
 
-/* --- KAPCSOLATI PANEL & TÉRKÉP --- */
+/* --- CONTACTS & MAP --- */
 
 .contact-triple-grid {
     display: grid;
@@ -1889,19 +1867,19 @@ p {
     width: 85%;
     max-width: 1400px;
     margin: 5rem auto 80px auto;
-    align-items: stretch; /* Ensures all cards match the height of the tallest card */
+    align-items: stretch;
 }
 
 .mini-rec-card {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center; /* Centers the text vertically inside the card */
+    justify-content: center;
     text-align: center;
-    padding: 2.5rem 2rem; /* Symmetrical, clean padding on all sides */
+    padding: 2.5rem 2rem;
     background: linear-gradient(145deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
     border: 1px solid rgba(var(--gold), 0.2);
-    border-radius: 6px; /* Slightly softened corners for a modern feel */
+    border-radius: 6px;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
     overflow: hidden;
@@ -1909,18 +1887,17 @@ p {
 }
 
 .mini-rec-card:hover {
-    transform: translateY(-8px); /* Slightly subtler hover effect so it feels more premium */
+    transform: translateY(-8px);
     border-color: rgb(var(--gold));
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
     background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(var(--gold), 0.05));
 }
 
-/* Treat the text container as a flex column to control vertical spacing perfectly */
 .mini-text {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.75rem; /* Creates exact, uniform space between every text line */
+    gap: 0.75rem;
     width: 100%;
 }
 
@@ -1929,17 +1906,17 @@ p {
     color: rgb(var(--bright-text));
     font-size: 1.4rem;
     padding: 0;
-    margin: 0 0 0.25rem 0; /* Tiny extra bump under the heading to separate it from the data */
+    margin: 0 0 0.25rem 0;
     letter-spacing: 2px;
 }
 
 .mini-text p,
 .mini-text a {
     color: rgb(var(--text));
-    font-size: 1.05rem; /* Very slight bump in readability */
+    font-size: 1.05rem;
     line-height: 1.5;
     display: block;
-    margin: 0; /* We removed margins because the 'gap' property handles the spacing now */
+    margin: 0;
     transition: color 0.3s ease;
 }
 
@@ -1947,15 +1924,11 @@ p {
     color: rgb(var(--text));
     font-size: 1.05rem;
     line-height: 1.5;
-    
-    /* Aligns the SVG icon and text horizontally */
     display: inline-flex; 
     align-items: center; 
     justify-content: center;
     gap: 0.6rem; 
     margin: 0;
-    
-    /* Subtle underline styling */
     text-decoration: underline;
     text-decoration-thickness: 1px;
     text-decoration-color: rgba(var(--gold), 0.4);
@@ -1964,34 +1937,31 @@ p {
     transition: all 0.3s ease;
 }
 
-/* Styles the SVG icons completely from the stylesheet */
 .mini-text a svg {
     flex-shrink: 0;
-    stroke: rgba(var(--gold), 0.8); /* Applies your CSS variable to the icon */
+    stroke: rgba(var(--gold), 0.8);
     transition: stroke 0.3s ease, transform 0.3s ease;
 }
 
-/* Text hover state */
 .mini-text a:hover {
     color: rgb(var(--gold));
     text-decoration-color: rgb(var(--gold));
     transform: translateY(-2px); 
 }
 
-/* Icon hover state */
 .mini-text a:hover svg {
     stroke: rgb(var(--gold));
     transform: scale(1.1); 
 }
 
 .contact-map-full {
-    width: 85%; /* Aligned with .contact-triple-grid */
-    max-width: 1400px; /* Aligned with .contact-triple-grid */
+    width: 85%;
+    max-width: 1400px;
     margin: 0 auto 80px auto;
-    border: 1px solid rgba(var(--gold), 0.2); /* Matched the card border opacity */
-    padding: 1rem; /* Switched to rems (16px) for a slightly breathier, cleaner border gap */
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01)); /* Matched the card background */
-    border-radius: 6px; /* Matched the card border-radius */
+    border: 1px solid rgba(var(--gold), 0.2); 
+    padding: 1rem;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01)); 
+    border-radius: 6px;
 }
 
 .contact-map-full iframe {
@@ -2000,10 +1970,9 @@ p {
     filter: grayscale(100%) invert(90%) contrast(85%);
     transition: filter 0.5s ease;
     display: block;
-    border-radius: 4px; /* Curves the sharp corners of the Google Map to fit inside the rounded container */
+    border-radius: 4px;
 }
 
-/* Optional: Gives the map a subtle interaction when the user hovers over it */
 .contact-map-full:hover iframe {
     filter: grayscale(80%) invert(90%) contrast(95%); 
 }
