@@ -1975,6 +1975,102 @@ p {
     filter: grayscale(80%) invert(90%) contrast(95%); 
 }
 
+/* --- CONTACT FORM --- */
+
+#contactForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 85%;
+    max-width: 800px;
+    margin: 0 auto 60px auto;
+    padding: 3rem;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+    border: 1px solid rgba(var(--gold), 0.2);
+    border-radius: 6px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+#contactForm input,
+#contactForm textarea {
+    width: 100%;
+    padding: 1rem 1.25rem;
+    background-color: rgba(var(--extra-dark), 0.6);
+    border: 1px solid rgba(var(--gold), 0.3);
+    border-radius: 4px;
+    color: rgb(var(--bright-text));
+    font-family: inherit;
+    font-size: 1rem;
+    letter-spacing: 0.05rem;
+    transition: all 0.3s ease;
+}
+
+#contactForm input::placeholder,
+#contactForm textarea::placeholder {
+    color: rgba(var(--text), 0.5);
+    letter-spacing: 0.05rem;
+}
+
+#contactForm input:focus,
+#contactForm textarea:focus {
+    outline: none;
+    border-color: rgb(var(--gold));
+    background-color: rgba(var(--extra-dark), 0.9);
+    box-shadow: 0 0 10px rgba(var(--gold), 0.15);
+}
+
+#contactForm textarea {
+    resize: vertical;
+    min-height: 150px;
+}
+
+#contactForm button[type="submit"] {
+    cursor: pointer;
+    padding: 1rem 2rem;
+    background: transparent;
+    color: rgb(var(--gold));
+    border: 1px solid rgb(var(--gold));
+    border-radius: 4px;
+    font-family: 'Cinzel', serif, sans-serif;
+    font-size: 1.1rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    margin-top: 0.5rem;
+    align-self: center;
+    width: 100%;
+}
+
+#contactForm button[type="submit"]:hover {
+    background-color: rgb(var(--gold));
+    color: rgb(var(--extra-dark));
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(var(--gold), 0.3);
+}
+
+#formStatus {
+    width: 85%;
+    max-width: 800px;
+    margin: -40px auto 60px auto;
+    font-size: 1.05rem;
+    letter-spacing: 1px;
+    color: rgb(var(--gold));
+    text-align: center;
+}
+
+/* --- RESPONSIVE ADJUSTMENTS FOR FORM --- */
+@media screen and (max-width: 768px) {
+    #contactForm {
+        width: 90%;
+        padding: 1.5rem;
+    }
+    
+    #formStatus {
+        width: 90%;
+    }
+}
+
 /* --- FOOTER --- */
 
 .footer {

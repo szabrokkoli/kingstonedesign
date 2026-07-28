@@ -197,6 +197,45 @@ window.onhashchange = () => {
 };
 
 
+/* --- 6. CONTACT FORM --- */
+
+const form = document.getElementById("contactForm");
+const statusDiv = document.getElementById("formStatus");
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const formData = {
+    name: document.getElementById("name").value,
+    email: document.getElementById("email").value,
+    message: document.getElementById("message").value
+  };
+
+  statusDiv.textContent = "Sending...";
+
+  try {
+    const response = await fetch("https://us-central1-kingstonedesign.cloudfunctions.net/sendContactForm", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(formData)
+    });
+
+    const result = await response.json();
+
+    if (response.ok) {
+      statusDiv.textContent = "Üzenet sikeresen elküldve.";
+      form.reset();
+    } else {
+      statusDiv.textContent = "Nem sikerült elküldeni az üzenetet, próbáljon más elérhetőségen keresni minket!";
+    }
+  } catch (error) {
+    console.error("Hiba:", error);
+    statusDiv.textContent = "Hiba történt. Kérlek, próbáld újra később.";
+  }
+});
+
 
     /* --- 6. CAROUSEL --- */
     const carouselTrack = document.querySelector('.carousel-track');
