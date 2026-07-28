@@ -476,7 +476,7 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: clamp(2.5rem, 4rem, 6rem);
+    font-size: clamp(1.8rem, 8vw, 6rem);
     font-family: 'Cinzel', serif;
     color: rgb(var(--bright-text));
     font-weight: bold;
@@ -531,14 +531,12 @@ p {
 @media screen and (max-width: 768px) {
     .upper-picture {
         height: 40vh;
-        font-size: clamp(2.5rem, 3rem, 5rem);
         justify-content: center;
         align-items: center;
     }
 
     .upper-picture.product {
         height: 40vh;
-        font-size: clamp(2.5rem, 3rem, 5rem);
         justify-content: center;
         align-items: center;
     }
