@@ -197,45 +197,98 @@ window.onhashchange = () => {
 };
 
 
-/* --- 6. CONTACT FORM --- */
+/* --- 6. CONTACT FORM & MODAL --- */
 
 const form = document.getElementById("contactForm");
-const statusDiv = document.getElementById("formStatus");
+const modal = document.getElementById("formModal");
+const modalTitle = document.getElementById("modalTitle");
+const modalMessage = document.getElementById("modalMessage");
+const modalIcon = document.getElementById("modalIcon");
+const modalCloseBtn = document.getElementById("modalCloseBtn");
+const submitBtn = form.querySelector('button[type="submit"]');
 
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  const formData = {
-    name: document.getElementById("name").value,
-    email: document.getElementById("email").value,
-    message: document.getElementById("message").value
-  };
-
-  statusDiv.textContent = "Sending...";
-
-  try {
-    const response = await fetch("https://us-central1-kingstonedesign.cloudfunctions.net/sendContactForm", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(formData)
-    });
-
-    const result = await response.json();
-
-    if (response.ok) {
-      statusDiv.textContent = "Üzenet sikeresen elküldve.";
-      form.reset();
+function showModal(title, message, type) {
+    modalTitle.textContent = title;
+    modalMessage.textContent = message;
+    
+    if (type === "success") {
+        modalIcon.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgb(var(--gold))" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+        `;
     } else {
-      statusDiv.textContent = "Nem sikerült elküldeni az üzenetet, próbáljon más elérhetőségen keresni minket!";
+        modalIcon.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgb(var(--gold))" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+        `;
     }
-  } catch (error) {
-    console.error("Hiba:", error);
-    statusDiv.textContent = "Hiba történt. Kérlek, próbáld újra később.";
-  }
+    modal.classList.add("active");
+    document.body.classList.add("no-scroll");
+}
+
+function closeModal() {
+    modal.classList.remove("active");
+    document.body.classList.remove("no-scroll");
+}
+
+modalCloseBtn.addEventListener("click", closeModal);
+modal.addEventListener("click", (e) => {
+    if (e.target === modal) closeModal();
 });
 
+form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const formData = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        message: document.getElementById("message").value
+    };
+
+    const originalButtonText = submitBtn.textContent;
+    submitBtn.textContent = "Küldés folyamatban...";
+    submitBtn.disabled = true;
+
+    try {
+        const response = await fetch("https://us-central1-kingstonedesign.cloudfunctions.net/sendContactForm", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(formData)
+        });
+
+        if (response.ok) {
+            showModal(
+                "Sikeres küldés", 
+                "Köszönjük megkeresését! Az üzenetet sikeresen elküldtuk, hamarosan felvesszük Önnel a kapcsolatot.", 
+                "success"
+            );
+            form.reset();
+        } else {
+            showModal(
+                "Hiba történt", 
+                "Nem sikerült elküldeni az üzenetet. Kérjük, próbálja meg később, vagy keressen minket telefonon!", 
+                "error"
+            );
+        }
+    } catch (error) {
+        console.error("Hiba:", error);
+        showModal(
+            "Hálózati hiba", 
+            "Hiba történt a kapcsolat során. Kérjük, ellenőrizze az internetkapcsolatát.", 
+            "error"
+        );
+    } finally {
+        submitBtn.textContent = originalButtonText;
+        submitBtn.disabled = false;
+    }
+});
 
     /* --- 6. CAROUSEL --- */
     const carouselTrack = document.querySelector('.carousel-track');
