@@ -30,7 +30,8 @@ exports.sendContactForm = onRequest(
 
         const mailOptions = {
           from: `"King Stone Design" <${process.env.GMAIL_USER}>`,
-          to: process.env.GMAIL_USER,
+          to: "barakovicsgergo@kingstonedesign.hu, " +
+              "kiralydaniel@kingstonedesign.hu",
           subject: `Új üzenet: ${name}`,
           text: `Új üzenet a weboldalról:\n\n` +
                 `Név: ${name}\nEmail: ${email}\nÜzenet:\n${message}`,
