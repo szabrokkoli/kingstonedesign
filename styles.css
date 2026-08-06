@@ -965,9 +965,13 @@ p {
 
 .slide-wrapper,
 .slide,
-.slide-overlay {
+.slide-overlay,
+.slide-overlay h3,
+.slide-overlay p,
+.slide-overlay .btn {
     touch-action: pan-y;
     -webkit-user-drag: none;
+    -webkit-touch-callout: none;
     user-select: none;
 }
 

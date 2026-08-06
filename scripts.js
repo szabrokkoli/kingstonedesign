@@ -77,25 +77,34 @@ if (track) {
     resetTimer();
 
     let isDragging = false;
+    let didDrag = false;
     let startX = 0;
     let currentX = 0;
     let baseX = 0;
+    let activePointerId = null;
     const dragThresholdRatio = 0.15;
 
     const onPointerDown = (e) => {
         isDragging = true;
+        didDrag = false;
         startX = e.clientX;
         currentX = startX;
         baseX = -slideIndex * containerWidth;
+        activePointerId = e.pointerId;
         clearInterval(slideInterval);
         track.style.transition = 'none';
-        track.setPointerCapture(e.pointerId);
     };
 
     const onPointerMove = (e) => {
         if (!isDragging) return;
         currentX = e.clientX;
         let delta = currentX - startX;
+
+        if (!didDrag && Math.abs(delta) > 5) {
+            didDrag = true;
+            track.setPointerCapture(activePointerId);
+        }
+        if (!didDrag) return;
 
         const atStart = slideIndex === 0 && delta > 0;
         const atEnd = slideIndex === slides.length - 1 && delta < 0;
@@ -108,12 +117,18 @@ if (track) {
         if (!isDragging) return;
         isDragging = false;
 
-        const delta = currentX - startX;
-        if (Math.abs(delta) > containerWidth * dragThresholdRatio) {
-            delta < 0 ? moveSlide(1) : moveSlide(-1);
-        } else {
-            updateSlider();
+        if (didDrag) {
+            const delta = currentX - startX;
+            if (Math.abs(delta) > containerWidth * dragThresholdRatio) {
+                delta < 0 ? moveSlide(1) : moveSlide(-1);
+            } else {
+                updateSlider();
+            }
+            if (track.hasPointerCapture?.(activePointerId)) {
+                track.releasePointerCapture(activePointerId);
+            }
         }
+        activePointerId = null;
         resetTimer();
     };
 
@@ -122,12 +137,18 @@ if (track) {
     track.addEventListener('pointerup', endDrag);
     track.addEventListener('pointercancel', endDrag);
 
+    track.addEventListener('click', (e) => {
+        if (didDrag) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+    }, true);
+
     window.addEventListener('resize', () => {
         containerWidth = sliderViewport.getBoundingClientRect().width;
         updateSlider(false);
     });
 }
-
 
 // Navigation and mobile menu
 
