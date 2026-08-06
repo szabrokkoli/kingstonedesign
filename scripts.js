@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // Hero slider
 
-    const track = document.querySelector('.slider-track');
+const track = document.querySelector('.slider-track');
 if (track) {
     const sliderViewport = track.parentElement;
     const slides = document.querySelectorAll('.slide-wrapper');
@@ -76,6 +76,14 @@ if (track) {
     updateSlider(false);
     resetTimer();
 
+    const getCurrentTranslateX = () => {
+        const style = window.getComputedStyle(track);
+        const t = style.transform;
+        if (t === 'none') return 0;
+        const values = t.match(/matrix.*\((.+)\)/)[1].split(',').map(parseFloat);
+        return t.includes('3d') ? values[12] : values[4];
+    };
+
     let isDragging = false;
     let didDrag = false;
     let startX = 0;
@@ -85,18 +93,21 @@ if (track) {
     const dragThresholdRatio = 0.15;
 
     const onPointerDown = (e) => {
+        if (isDragging) return;
         isDragging = true;
         didDrag = false;
         startX = e.clientX;
         currentX = startX;
-        baseX = -slideIndex * containerWidth;
+        baseX = getCurrentTranslateX();
         activePointerId = e.pointerId;
         clearInterval(slideInterval);
         track.style.transition = 'none';
     };
 
     const onPointerMove = (e) => {
-        if (!isDragging) return;
+        if (!isDragging || e.pointerId !== activePointerId) return;
+        if (e.cancelable) e.preventDefault();
+
         currentX = e.clientX;
         let delta = currentX - startX;
 
@@ -113,8 +124,8 @@ if (track) {
         track.style.transform = `translateX(${baseX + delta}px)`;
     };
 
-    const endDrag = () => {
-        if (!isDragging) return;
+    const endDrag = (e) => {
+        if (!isDragging || (e && e.pointerId !== activePointerId)) return;
         isDragging = false;
 
         if (didDrag) {

@@ -975,6 +975,10 @@ p {
     user-select: none;
 }
 
+.scroll-down-indicator {
+    pointer-events: none;
+}
+
 /* --- CAROUSEL --- */
 
 .carousel-section {
