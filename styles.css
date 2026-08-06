@@ -963,6 +963,13 @@ p {
     }
 }
 
+.slide-wrapper,
+.slide,
+.slide-overlay {
+    touch-action: pan-y;
+    -webkit-user-drag: none;
+    user-select: none;
+}
 
 /* --- CAROUSEL --- */
 
@@ -1118,6 +1125,24 @@ p {
     }
 }
 
+.carousel-track,
+.carousel-card,
+.card-inner,
+.card-inner img,
+.card-title {
+    touch-action: pan-y;
+    -webkit-user-drag: none;
+    -webkit-touch-callout: none;
+    user-select: none;
+}
+
+.carousel-track {
+    cursor: grab;
+}
+
+.carousel-track.dragging {
+    cursor: grabbing;
+}
 /* --- ZIGZAG --- */
 
 .zigzag {
