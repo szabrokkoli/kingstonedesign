@@ -47,12 +47,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
 const track = document.querySelector('.slider-track');
 if (track) {
-    const sliderViewport = track.parentElement;
+    const sliderContainer = track.parentElement;
     const slides = document.querySelectorAll('.slide-wrapper');
     const dots = document.querySelectorAll('.dot');
     let slideIndex = 0;
     let slideInterval;
-    let containerWidth = sliderViewport.getBoundingClientRect().width;
+    let containerWidth = sliderContainer.getBoundingClientRect().width;
 
     const setTransform = (px, animate) => {
         track.style.transition = animate ? 'transform 0.35s ease' : 'none';
@@ -122,7 +122,7 @@ if (track) {
                     captureTarget.setPointerCapture(activePointerId);
                 }
             } catch (err) {
-                try { track.setPointerCapture(activePointerId); } catch(e){}
+                try { sliderContainer.setPointerCapture(activePointerId); } catch(e){}
             }
         }
         if (!didDrag) return;
@@ -153,8 +153,8 @@ if (track) {
             try {
                 if (captureTarget && captureTarget.hasPointerCapture?.(activePointerId)) {
                     captureTarget.releasePointerCapture(activePointerId);
-                } else if (track.hasPointerCapture?.(activePointerId)) {
-                    track.releasePointerCapture(activePointerId);
+                } else if (sliderContainer.hasPointerCapture?.(activePointerId)) {
+                    sliderContainer.releasePointerCapture(activePointerId);
                 }
             } catch(err) {}
         }
@@ -164,12 +164,12 @@ if (track) {
         resetTimer();
     };
 
-    track.addEventListener('pointerdown', onPointerDown);
-    track.addEventListener('pointermove', onPointerMove);
-    track.addEventListener('pointerup', endDrag);
-    track.addEventListener('pointercancel', endDrag);
+    sliderContainer.addEventListener('pointerdown', onPointerDown);
+    sliderContainer.addEventListener('pointermove', onPointerMove);
+    sliderContainer.addEventListener('pointerup', endDrag);
+    sliderContainer.addEventListener('pointercancel', endDrag);
 
-    track.addEventListener('click', (e) => {
+    sliderContainer.addEventListener('click', (e) => {
         if (didDrag) {
             e.preventDefault();
             e.stopPropagation();
@@ -177,7 +177,7 @@ if (track) {
     }, true);
 
     window.addEventListener('resize', () => {
-        containerWidth = sliderViewport.getBoundingClientRect().width;
+        containerWidth = sliderContainer.getBoundingClientRect().width;
         updateSlider(false);
     });
 }
