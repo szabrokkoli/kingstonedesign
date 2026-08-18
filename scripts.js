@@ -90,6 +90,8 @@ if (track) {
     let currentX = 0;
     let baseX = 0;
     let activePointerId = null;
+    let startTime = 0;
+    let captureTarget = null;
     const dragThresholdRatio = 0.15;
 
     const onPointerDown = (e) => {
@@ -100,6 +102,8 @@ if (track) {
         currentX = startX;
         baseX = getCurrentTranslateX();
         activePointerId = e.pointerId;
+        startTime = Date.now();
+        captureTarget = e.target;
         clearInterval(slideInterval);
         track.style.transition = 'none';
     };
@@ -113,7 +117,13 @@ if (track) {
 
         if (!didDrag && Math.abs(delta) > 5) {
             didDrag = true;
-            track.setPointerCapture(activePointerId);
+            try {
+                if (captureTarget && captureTarget.setPointerCapture) {
+                    captureTarget.setPointerCapture(activePointerId);
+                }
+            } catch (err) {
+                try { track.setPointerCapture(activePointerId); } catch(e){}
+            }
         }
         if (!didDrag) return;
 
@@ -130,16 +140,27 @@ if (track) {
 
         if (didDrag) {
             const delta = currentX - startX;
-            if (Math.abs(delta) > containerWidth * dragThresholdRatio) {
+            const elapsedTime = Date.now() - startTime;
+            
+            const isFastFlick = elapsedTime < 350 && Math.abs(delta) > 30;
+
+            if (Math.abs(delta) > containerWidth * dragThresholdRatio || isFastFlick) {
                 delta < 0 ? moveSlide(1) : moveSlide(-1);
             } else {
                 updateSlider();
             }
-            if (track.hasPointerCapture?.(activePointerId)) {
-                track.releasePointerCapture(activePointerId);
-            }
+            
+            try {
+                if (captureTarget && captureTarget.hasPointerCapture?.(activePointerId)) {
+                    captureTarget.releasePointerCapture(activePointerId);
+                } else if (track.hasPointerCapture?.(activePointerId)) {
+                    track.releasePointerCapture(activePointerId);
+                }
+            } catch(err) {}
         }
+        
         activePointerId = null;
+        captureTarget = null;
         resetTimer();
     };
 
